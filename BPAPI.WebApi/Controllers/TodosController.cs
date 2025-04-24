@@ -1,5 +1,6 @@
 using BPAPI.Domain;
 using BPAPI.Domain.Services;
+using BPAPI.WebApi.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BPAPI.WebApi.Controllers;
@@ -27,5 +28,25 @@ public class TodosController : ControllerBase
     {
         var doneTodos = _todos.AllDone();
         return Ok(doneTodos);
+    }
+    
+    [HttpGet("{id:guid}")]
+    public ActionResult<Todo> GetTodo(Guid id)
+    {
+        var todo = _todos.Get(id);
+        if (todo is null)
+        {
+            return NotFound();
+        }
+        
+        return Ok(todo);
+    }
+
+    [HttpPost("add")]
+    public IActionResult AddTodos(TodoInput todoInput)
+    {
+        var newTodo = todoInput.ToNewTodo();
+        _todos.Add(newTodo);
+        return Created($"todos/{newTodo.Id}", newTodo);
     }
 }

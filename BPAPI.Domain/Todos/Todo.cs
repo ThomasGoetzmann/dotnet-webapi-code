@@ -1,3 +1,3 @@
 ﻿namespace BPAPI.Domain;
 
-public record Todo(long Id, string Text, bool IsDone);
+public record Todo(Guid Id, string Text, bool IsDone);

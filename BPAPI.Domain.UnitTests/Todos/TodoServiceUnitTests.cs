@@ -13,8 +13,8 @@ public class TodoServiceUnitTests
         var fakeDatabase = Substitute.For<ITodoRepository>();
         var todoService = new TodoService(fakeDatabase);
 
-        var t1 = new Todo(1, "Todo1", false);
-        var t2 = new Todo(2, "Todo2", true);
+        var t1 = new Todo(Guid.Empty, "Todo1", false);
+        var t2 = new Todo(Guid.Empty, "Todo2", true);
         fakeDatabase
             .GetAllTodos()
             .Returns([t1, t2]);
@@ -33,8 +33,8 @@ public class TodoServiceUnitTests
         var fakeDatabase = Substitute.For<ITodoRepository>();
         var todoService = new TodoService(fakeDatabase);
 
-        var t1 = new Todo(1, "Todo1", false);
-        var t2 = new Todo(2, "Todo2", true);
+        var t1 = new Todo(Guid.Empty, "Todo1", false);
+        var t2 = new Todo(Guid.Empty, "Todo2", true);
         fakeDatabase
             .GetAllTodos()
             .Returns([t1, t2]);

@@ -6,6 +6,8 @@ public interface ITodoService
 {
     IEnumerable<Todo> AllOpen();
     IEnumerable<Todo> AllDone();
+    void Add(Todo todo);
+    Todo? Get(Guid id);
 }
 
 public class TodoService : ITodoService
@@ -23,6 +25,14 @@ public class TodoService : ITodoService
     
     public IEnumerable<Todo> AllDone()
         => _todoRepository.GetAllTodos()
-            .Where(t => t.IsDone); 
+            .Where(t => t.IsDone);
+
+    public void Add(Todo todo)
+        => _todoRepository.Add(todo);
+
+    public Todo? Get(Guid id)
+    {
+        return _todoRepository.Find(id);
+    }
 }
 
