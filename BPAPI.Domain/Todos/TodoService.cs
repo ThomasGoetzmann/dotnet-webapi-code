@@ -1,3 +1,5 @@
+using BPAPI.Domain.Todos;
+
 namespace BPAPI.Domain.Services;
 
 public interface ITodoService
@@ -8,18 +10,19 @@ public interface ITodoService
 
 public class TodoService : ITodoService
 {
-    private static List<Todo> todos = [
-        new(1, "Créer le controler", true),
-        new(2, "Créer le service et le domain", true),
-        new(3, "Injecter les dépendances", false)
-    ];
-    
+    private readonly ITodoRepository _todoRepository;
+
+    public TodoService(ITodoRepository todoRepository)
+    {
+        _todoRepository = todoRepository;
+    }
+
     public IEnumerable<Todo> AllOpen() 
-        => todos
+        => _todoRepository.GetAllTodos()
             .Where(t => !t.IsDone);
     
     public IEnumerable<Todo> AllDone()
-        => todos
+        => _todoRepository.GetAllTodos()
             .Where(t => t.IsDone); 
 }
 

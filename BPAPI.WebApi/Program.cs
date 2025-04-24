@@ -1,4 +1,5 @@
 using BPAPI.Domain.Services;
+using BPAPI.Domain.Todos;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,7 @@ builder.Services.AddOpenApi();
 // required later for swagger usage
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddSingleton<ITodoRepository, InMemoryTodoDatabase>();
 builder.Services.AddTransient<ITodoService, TodoService>();
 
 var app = builder.Build();

@@ -1,9 +1,48 @@
-﻿namespace BPAPI.Domain.UnitTests;
+﻿using BPAPI.Domain.Services;
+using BPAPI.Domain.Todos;
+using NSubstitute;
+
+namespace BPAPI.Domain.UnitTests;
 
 public class TodoServiceUnitTests
 {
     [Fact]
-    public void Test1()
+    public void AllDone_AllStatusOfTodos_ReturnsOnlyDone()
     {
+        // Arrange
+        var fakeDatabase = Substitute.For<ITodoRepository>();
+        var todoService = new TodoService(fakeDatabase);
+
+        var t1 = new Todo(1, "Todo1", false);
+        var t2 = new Todo(2, "Todo2", true);
+        fakeDatabase
+            .GetAllTodos()
+            .Returns([t1, t2]);
+
+        // Act
+        var doneTodos = todoService.AllDone();
+
+        // Assert
+        Assert.Contains(t2, doneTodos);
+    }
+    
+    [Fact]
+    public void AllOpen_AllStatusOfTodos_ReturnsOnlyOpen()
+    {
+        // Arrange
+        var fakeDatabase = Substitute.For<ITodoRepository>();
+        var todoService = new TodoService(fakeDatabase);
+
+        var t1 = new Todo(1, "Todo1", false);
+        var t2 = new Todo(2, "Todo2", true);
+        fakeDatabase
+            .GetAllTodos()
+            .Returns([t1, t2]);
+
+        // Act
+        var openTodos = todoService.AllOpen();
+
+        // Assert
+        Assert.Contains(t1, openTodos);
     }
 }
