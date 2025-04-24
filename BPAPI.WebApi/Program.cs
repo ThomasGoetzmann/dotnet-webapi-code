@@ -1,3 +1,4 @@
+using BPAPI.Domain.Posts;
 using BPAPI.Domain.Todos;
 using Scalar.AspNetCore;
 
@@ -14,6 +15,10 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<ITodoRepository, InMemoryTodoDatabase>();
 builder.Services.AddTransient<ITodoService, TodoService>();
+builder.Services.AddHttpClient<IPostService, PostService>(client =>
+{
+    client.BaseAddress = new Uri("https://jsonplaceholder.typicode.com/");
+});
 
 var app = builder.Build();
 
