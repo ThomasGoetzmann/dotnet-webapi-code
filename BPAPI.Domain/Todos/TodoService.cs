@@ -32,19 +32,13 @@ public class TodoService : ITodoService
     public void Add(Todo todo)
         => _todoRepository.Add(todo);
 
-    public Todo? Get(Guid id)
-    {
-        return _todoRepository.Find(id);
-    }
+    public Todo? Get(Guid id) 
+        => _todoRepository.Find(id);
 
-    public Todo? SetDone(Guid id)
-    {
-        return _todoRepository.SetDone(id);
-    }
+    public Todo? SetDone(Guid id) 
+        => _todoRepository.SetDone(id);
 
-    public void Remove(Guid id)
-    {
-        _todoRepository.Remove(id);
-    }
+    public void Remove(Guid id) 
+        => _todoRepository.Remove(id);
 }
 
