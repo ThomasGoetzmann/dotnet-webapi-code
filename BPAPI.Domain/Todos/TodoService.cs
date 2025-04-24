@@ -1,6 +1,4 @@
-using BPAPI.Domain.Todos;
-
-namespace BPAPI.Domain.Services;
+namespace BPAPI.Domain.Todos;
 
 public interface ITodoService
 {

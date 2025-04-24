@@ -1,8 +1,7 @@
-﻿using BPAPI.Domain.Services;
-using BPAPI.Domain.Todos;
+﻿using BPAPI.Domain.Todos;
 using NSubstitute;
 
-namespace BPAPI.Domain.UnitTests;
+namespace BPAPI.Domain.UnitTests.Todos;
 
 public class TodoServiceUnitTests
 {

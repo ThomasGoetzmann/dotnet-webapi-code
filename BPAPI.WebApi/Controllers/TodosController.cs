@@ -1,5 +1,5 @@
 using BPAPI.Domain;
-using BPAPI.Domain.Services;
+using BPAPI.Domain.Todos;
 using BPAPI.WebApi.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
@@ -50,7 +50,7 @@ public class TodosController : ControllerBase
         return Created($"todos/{newTodo.Id}", newTodo);
     }
     
-    [HttpPut("set-done")]
+    [HttpPut("set-done/{id:guid}")]
     public ActionResult<Todo> UpdateTodo(Guid id)
     {
         var updatedTodo = _todos.SetDone(id);
@@ -60,7 +60,7 @@ public class TodosController : ControllerBase
         return Ok(updatedTodo);
     }
 
-    [HttpDelete("remove")]
+    [HttpDelete("remove/{id:guid}")]
     public IActionResult DeleteTodo(Guid id)
     {
         _todos.Remove(id);
