@@ -49,4 +49,21 @@ public class TodosController : ControllerBase
         _todos.Add(newTodo);
         return Created($"todos/{newTodo.Id}", newTodo);
     }
+    
+    [HttpPut("set-done")]
+    public ActionResult<Todo> UpdateTodo(Guid id)
+    {
+        var updatedTodo = _todos.SetDone(id);
+        if (updatedTodo is null)
+            return NotFound();
+        
+        return Ok(updatedTodo);
+    }
+
+    [HttpDelete("remove")]
+    public IActionResult DeleteTodo(Guid id)
+    {
+        _todos.Remove(id);
+        return Ok();
+    }
 }

@@ -8,6 +8,8 @@ public interface ITodoService
     IEnumerable<Todo> AllDone();
     void Add(Todo todo);
     Todo? Get(Guid id);
+    Todo? SetDone(Guid id);
+    void Remove(Guid id);
 }
 
 public class TodoService : ITodoService
@@ -33,6 +35,16 @@ public class TodoService : ITodoService
     public Todo? Get(Guid id)
     {
         return _todoRepository.Find(id);
+    }
+
+    public Todo? SetDone(Guid id)
+    {
+        return _todoRepository.SetDone(id);
+    }
+
+    public void Remove(Guid id)
+    {
+        _todoRepository.Remove(id);
     }
 }
 
