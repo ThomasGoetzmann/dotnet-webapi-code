@@ -2,9 +2,13 @@ using BPAPI.Domain.Posts;
 using BPAPI.Domain.Todos;
 using Scalar.AspNetCore;
 using Serilog;
+using Serilog.Events;
 
 Log.Logger = new LoggerConfiguration()
-    .WriteTo.Console()
+    .WriteTo.Console(
+        restrictedToMinimumLevel: LogEventLevel.Information,
+        "Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {Message:lj}{NewLine}{Exception}"
+    )
     .WriteTo.Seq("http://localhost:5341")
     .MinimumLevel.Information()
     .CreateLogger();
