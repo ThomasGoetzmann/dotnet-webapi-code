@@ -1,8 +1,17 @@
 using BPAPI.Domain.Posts;
 using BPAPI.Domain.Todos;
 using Scalar.AspNetCore;
+using Serilog;
+
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .WriteTo.Seq("http://localhost:5341")
+    .MinimumLevel.Information()
+    .CreateLogger();
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Logging.AddSerilog(Log.Logger);
 
 // Add services to the container.
 
@@ -35,5 +44,5 @@ if (app.Environment.IsDevelopment())
 app.UseAuthorization();
 
 app.MapControllers();
-
+Log.Information("Application starting");
 app.Run();
